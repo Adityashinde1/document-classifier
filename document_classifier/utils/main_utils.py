@@ -3,6 +3,7 @@ import sys
 from typing import Dict
 import dill
 import pickle
+import json
 import numpy as np
 import yaml
 from zipfile import Path
@@ -42,6 +43,28 @@ class MainUtils:
                 obj = pickle.load(pickle_obj)
             return obj
 
+        except Exception as e:
+            raise DocumentClassifierException(e, sys) from e
+        
+
+    @staticmethod
+    def dump_json_file(data: dict, filepath: str):
+        try:
+            with open(filepath, "w") as outfile:
+                json.dump(data, outfile)
+
+        except Exception as e:
+            raise DocumentClassifierException(e, sys) from e
+        
+
+    @staticmethod
+    def read_json_file(filepath: str):
+        try:
+            with open(filepath, 'r') as openfile:
+                json_object = json.load(openfile)
+
+            return json_object
+        
         except Exception as e:
             raise DocumentClassifierException(e, sys) from e
             

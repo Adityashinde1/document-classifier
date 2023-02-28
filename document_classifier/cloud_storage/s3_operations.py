@@ -351,3 +351,19 @@ class S3Operation:
             
         except Exception as e:
             raise DocumentClassifierException(e, sys) from e
+        
+
+    def sync_folder_from_s3(
+        self, folder: str, bucket_name: str, bucket_folder_name: str
+    ) -> None:
+        logger.info("Entered the sync_folder_from_s3 method of S3Operation class")
+        try:
+            command: str = (
+                f"aws s3 sync s3://{bucket_name}/{bucket_folder_name}/ {folder} "
+            )
+
+            os.system(command)
+            logger.info("Exited the sync_folder_from_s3 method of S3Operation class")
+
+        except Exception as e:
+            raise DocumentClassifierException(e, sys) from e

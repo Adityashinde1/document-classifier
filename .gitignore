@@ -7,6 +7,7 @@ __pycache__/
 *.so
 demo.py
 artifacts
+data
 # Distribution / packaging
 .Python
 build/
