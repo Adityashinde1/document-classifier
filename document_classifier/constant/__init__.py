@@ -35,6 +35,7 @@ SAVED_MODEL_DIR = 'saved_model'
 
 MODEL_EVALUATION_ARTIFACTS_DIR = 'ModelEvaluationArtifacts'
 
+BEST_MODEL_DIR = 'best_model'
 
 APP_HOST = "0.0.0.0"
 APP_PORT = 8080

@@ -44,4 +44,4 @@ class ModelEvaluationConfig:
 @dataclass
 class ModelPusherConfig:
     def __init__(self):
-        self.s3_model_path: str = os.path.join(from_root(), SAVED_MODEL_DIR)
+        self.s3_model_path: str = os.path.join(ARTIFACTS_DIR, MODEL_TRAINER_ARTIFACTS_DIR, TRAINED_MODEL_DIR_NAME)

@@ -1,9 +1,10 @@
+import json
 from fastapi import FastAPI, File
 from uvicorn import run as app_run
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response, JSONResponse
 from document_classifier.pipeline.training_pipeline import TrainPipeline
-# from document_classifier.pipeline.prediction_pipeline import ModelPredictor
+from document_classifier.pipeline.prediction_pipeline import ModelPredictor
 from document_classifier.constant import *
 
 app = FastAPI()
@@ -29,6 +30,21 @@ async def training():
 
     except Exception as e:
         return Response(f"Error Occurred! {e}")
+    
+
+@app.post("/predict")
+async def prediction(image_file: bytes = File(description="A file read as bytes")):
+    try:
+        prediction_pipeline = ModelPredictor()
+
+        result = prediction_pipeline.initiate_model_predictor(image_file)
+
+        json_str = json.dumps(result, indent=4, default=str)
+        
+        return Response(content=json_str, media_type='application/json')
+
+    except Exception as e:
+        JSONResponse(content = f"Error Occurred! {e}", status_code=500)
     
 
 

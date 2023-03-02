@@ -5,3 +5,6 @@ flowchart
 demo.py
 LICENSE
 notebook
+label2idx.json
+best_model
+saved_model

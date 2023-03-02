@@ -71,6 +71,10 @@ class DataIngestion:
             self.utils.dump_json_file(data=label2idx, filepath=self.data_ingestion_config.label2idx_file_path)
             logger.info("Dumped index to label and label to index as json files")
 
+            label2idx_filepath = os.path.join(ARTIFACTS_DIR, DATA_INGESTION_ARTIFACTS_DIR, LABEL_TO_IDX_FILE_NAME)
+            self.s3_operation.upload_file(from_filename=label2idx_filepath, to_filename=LABEL_TO_IDX_FILE_NAME, bucket_name=BUCKET_NAME, remove=False)
+            logger.info("Uploaded the label to index file in s3 bucket")
+
             data_ingestion_artifacts = DataIngestionArtifacts(train_data_path=self.data_ingestion_config.train_data_download_path,
                                                               eval_data_path=self.data_ingestion_config.eval_data_download_path,
                                                               idx2label_file_path=self.data_ingestion_config.idx2label_file_path,

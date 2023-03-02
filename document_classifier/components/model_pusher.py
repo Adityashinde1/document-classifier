@@ -24,10 +24,10 @@ class ModelPusher:
             logger.info("Enetred the initiate_model_pusher method of Model pusher class")
             if self.model_evaluation_artifact.is_model_accepted == True:
                 
-                accepted_model_folder = os.path.dirname(self.model_evaluation_artifact.accepted_model_path)
-                # Uploading the model to s3 bucket
-                self.s3_operation.upload_folder(folder_name=accepted_model_folder, bucket_name=BUCKET_NAME)
+                accepted_model_folder = os.path.dirname(self.model_pusher_config.s3_model_path)
 
+                # Uploading the model to s3 bucket
+                self.s3_operation.sync_folder_to_s3(folder=accepted_model_folder, bucket_name=BUCKET_NAME, bucket_folder_name=SAVED_MODEL_DIR)
                 logger.info("Model pushed to S3 bucket")
             
             else:
