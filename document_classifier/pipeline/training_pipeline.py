@@ -44,7 +44,7 @@ class TrainPipeline:
                 data_ingestion_config=self.data_ingestion_config,  s3_operation=self.s3_operation
             )
             data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
-            logger.info("Got the data from Google cloud storage")
+            logger.info("Got the data from S3 bucket")
             logger.info(
                 "Exited the start_data_ingestion method of TrainPipeline class"
             )
@@ -54,7 +54,7 @@ class TrainPipeline:
             raise DocumentClassifierException(e, sys) from e
 
 
-    # This method is used to start the data validation
+    # This method is used to start the data transformation
     def start_data_transformation(
         self, data_ingestion_artifact: DataIngestionArtifacts
     ) -> DataTransformationArtifacts:
@@ -81,7 +81,7 @@ class TrainPipeline:
             raise DocumentClassifierException(e, sys) from e
 
 
-    # This method is used to start the model traidocument_classifier
+    # This method is used to start the model trainer
     def start_model_training(
         self, data_transformation_artifacts: DataTransformationArtifacts, data_ingestion_artifacts: DataIngestionArtifacts
     ) -> ModelTrainerArtifacts:
@@ -131,7 +131,7 @@ class TrainPipeline:
             raise DocumentClassifierException(e, sys) from e
 
 
-    # This method is used to statr model pusher
+    # This method is used to start model pusher
     def start_model_pusher(
         self, model_evaluation_artifact: ModelEvaluationArtifacts
     ) -> ModelPusherArtifacts:
@@ -173,3 +173,4 @@ class TrainPipeline:
 
         except Exception as e:
             raise DocumentClassifierException(e, sys) from e
+        

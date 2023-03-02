@@ -40,15 +40,13 @@ async def prediction(image_file: bytes = File(description="A file read as bytes"
         result = prediction_pipeline.initiate_model_predictor(image_file)
 
         json_str = json.dumps(result, indent=4, default=str)
-        
+
         return Response(content=json_str, media_type='application/json')
 
     except Exception as e:
         JSONResponse(content = f"Error Occurred! {e}", status_code=500)
     
 
-
-
-
 if __name__ == "__main__":
     app_run(app, host=APP_HOST, port=APP_PORT)
+    

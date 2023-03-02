@@ -52,8 +52,8 @@ class DataTransformation:
                 labels.extend([label for _ in range(len(os.listdir(f"{data_path}/{label}")))])
 
             data_frame = pd.DataFrame({'image_path': images, 'label': labels})
-            logger.info("Exited the convert_data_to_dataframe method of Data ingestion class")
 
+            logger.info("Exited the convert_data_to_dataframe method of Data ingestion class")
             return data_frame
         
         except Exception as e:
@@ -73,7 +73,7 @@ class DataTransformation:
             raise DocumentClassifierException(e, sys) from e
                 
 
-    def dataloader_from_df(self, data,features, device, shuffle = False):
+    def dataloader_from_df(self, data: DataFrame, features: dict, device: str, shuffle = False) -> object:
         try:
             logger.info("Entered the training_dataloader_from_df method of Data transformation class")
             dataset = Dataset.from_pandas(data)

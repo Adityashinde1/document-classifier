@@ -22,7 +22,7 @@ class ModelPredictor:
         self.s3_operation = S3Operation()
 
 
-    def doc_prediction(self, image_: Image, processor: object, device: str, model: object, label2idx: dict):
+    def doc_prediction(self, image_: Image, processor: object, device: str, model: object, label2idx: dict) -> dict:
         try:
             logger.info("Entered the doc_prediction method of Model predictor class")
             encoded_inputs = processor(image_, return_tensors="pt").to(device)
@@ -37,7 +37,7 @@ class ModelPredictor:
             raise DocumentClassifierException(e, sys) from e
         
 
-    def initiate_model_predictor(self, image_bytes: bytes):
+    def initiate_model_predictor(self, image_bytes: bytes) -> dict:
         try:
             logger.info("Entered the initiate_model_predictor method of Model predictor class")
             
@@ -46,14 +46,17 @@ class ModelPredictor:
             stream = io.BytesIO(image_bytes)
             orig.save(stream, 'PNG')
             image = Image.open(stream)
+            logger.info("Image bytes converted into image")
 
             self.s3_operation.sync_folder_from_s3(folder=BEST_MODEL_DIR, bucket_name=BUCKET_NAME, bucket_folder_name=SAVED_MODEL_DIR)
+            logger.info("Best model downloaded from s3 bucket for prediction")
 
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
             self.s3_operation.download_file(bucket_name=BUCKET_NAME, output_file_path=os.path.join(from_root(), LABEL_TO_IDX_FILE_NAME), key=LABEL_TO_IDX_FILE_NAME)
             label2idx_path = os.path.join(from_root(), LABEL_TO_IDX_FILE_NAME)
             label2idx = self.utils.read_json_file(filepath=label2idx_path)
+            logger.info("Label to index file loaded")
 
             best_model_path = os.path.join(from_root(), BEST_MODEL_DIR)
             model = LayoutLMv2ForSequenceClassification.from_pretrained(best_model_path)
@@ -61,7 +64,10 @@ class ModelPredictor:
 
             label = self.doc_prediction(image_=image, processor=self.processor, device=device, model=model, label2idx=label2idx)
             print(label)
+
+            logger.info("Exited the initiate_model_predictor method of Model predictor class")
             return label
 
         except Exception as e:
             raise DocumentClassifierException(e, sys) from e
+        

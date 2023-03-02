@@ -2,7 +2,6 @@ from dataclasses import dataclass
 import os
 from from_root import from_root
 from document_classifier.utils.main_utils import MainUtils
-from document_classifier.cloud_storage.s3_operations import S3Operation
 from document_classifier.constant import *
 
 @dataclass

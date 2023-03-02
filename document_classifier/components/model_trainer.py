@@ -92,8 +92,8 @@ class ModelTrainer:
             saved_model_path = os.path.join(ARTIFACTS_DIR, MODEL_TRAINER_ARTIFACTS_DIR, SAVED_MODEL_DIR)
 
             model_trainer_artifacts = ModelTrainerArtifacts(trained_model_path=saved_model_path)
+            
             logger.info("Exited the initiate_model_trainer method of Model trainer class")
-
             return model_trainer_artifacts
 
         except Exception as e:

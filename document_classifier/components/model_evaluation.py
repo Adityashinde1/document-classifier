@@ -27,7 +27,7 @@ class ModelEvaluation:
         self.processor = LayoutLMv2Processor(self.feature_extractor, self.tokenizer)
 
 
-    def model_evaluate(self, model: object, device: str, eval_dataloader:object):
+    def model_evaluate(self, model: object, device: str, eval_dataloader:object) -> float:
         try:
             logger.info("Entered the model_evaluate method of Model evaluation class")
             model.to(device)
@@ -98,6 +98,7 @@ class ModelEvaluation:
                 tmp_best_model_score = s3_model_accuracy
 
             is_model_accepted = trained_model_accuracy > tmp_best_model_score
+            logger.info(f"Is model accepted? -> {is_model_accepted}")
 
             if is_model_accepted is True:
                 accepted_model_path: str = self.model_trainer_artifacts.trained_model_path
