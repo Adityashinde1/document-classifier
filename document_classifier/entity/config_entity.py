@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 import os
-from from_root import from_root
 from document_classifier.utils.main_utils import MainUtils
 from document_classifier.constant import *
 
@@ -37,7 +36,7 @@ class ModelEvaluationConfig:
     def __init__(self):
         self.model_evaluation_artifacts_dir: str = os.path.join(ARTIFACTS_DIR, MODEL_EVALUATION_ARTIFACTS_DIR)
         self.trained_model_path: str = os.path.join(ARTIFACTS_DIR, MODEL_TRAINER_ARTIFACTS_DIR, TRAINED_MODEL_DIR_NAME)
-        self.s3_local_model_path: str = os.path.join(from_root(), TRAINED_MODEL_DIR_NAME)
+        self.s3_local_model_path: str = TRAINED_MODEL_DIR_NAME
 
 
 @dataclass

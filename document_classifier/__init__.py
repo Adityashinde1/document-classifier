@@ -1,9 +1,8 @@
 import logging
 import os
-from from_root import from_root
 from document_classifier.constant import ARTIFACTS_DIR, LOGS_DIR, LOGS_FILE_NAME
 
-logs_path = os.path.join(from_root(), ARTIFACTS_DIR, LOGS_DIR)
+logs_path = os.path.join(ARTIFACTS_DIR, LOGS_DIR)
 
 os.makedirs(logs_path, exist_ok=True)
 

@@ -1,10 +1,8 @@
-artifacts
-assignment
-env
-flowchart
-demo.py
-LICENSE
-notebook
+artifacts/
+assignment/
+best_model/
+env/
+flowcharts/
+notebook/
+saved_model/
 label2idx.json
-best_model
-saved_model

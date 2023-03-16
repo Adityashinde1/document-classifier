@@ -1,10 +1,9 @@
 import os
-from from_root import from_root
 from datetime import datetime
 
 TIMESTAMP: str = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
 
-ARTIFACTS_DIR = os.path.join(from_root(), "artifacts", TIMESTAMP)
+ARTIFACTS_DIR = os.path.join("artifacts", TIMESTAMP)
 LOGS_DIR = 'logs'
 LOGS_FILE_NAME = 'document_classifier.log' 
 
@@ -29,7 +28,7 @@ EVAL_DATALOADER_FILE_NAME = 'eval_dataloader.pkl'
 
 MODEL_TRAINER_ARTIFACTS_DIR = 'ModelTrainerArtifacts'
 LEARNING_RATE = 5e-5
-EPOCHS = 1
+EPOCHS = 20
 TRAINED_MODEL_DIR_NAME = 'saved_model/'
 SAVED_MODEL_DIR = 'saved_model'
 
